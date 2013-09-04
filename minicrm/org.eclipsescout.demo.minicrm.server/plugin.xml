@@ -26,17 +26,17 @@
       </service>
       <service
             factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
-            class="org.eclipsescout.demo.minicrm.server.services.common.sql.DerbySqlService"
-            session="org.eclipsescout.demo.minicrm.server.ServerSession">
-      </service>
-      <service
-            factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
             class="org.eclipsescout.demo.minicrm.server.ui.desktop.form.CompanyService"
             session="org.eclipsescout.demo.minicrm.server.ServerSession">
       </service>
       <service
             factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
             class="org.eclipsescout.demo.minicrm.server.services.lookup.CompanyLookupService"
+            session="org.eclipsescout.demo.minicrm.server.ServerSession">
+      </service>
+      <service
+            factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
+            class="org.eclipsescout.demo.minicrm.server.services.common.sql.MySqlSqlService"
             session="org.eclipsescout.demo.minicrm.server.ServerSession">
       </service>
    </extension>
@@ -109,8 +109,8 @@
          name=""
          point="org.eclipse.core.runtime.products">
       <product
-            name="minicrm Server"
-            application="org.eclipsescout.demo.minicrm.server.app">
+            application="org.eclipsescout.demo.minicrm.server.app"
+            name="minicrm Server">
          <property
                name="appName"
                value="minicrm Server">
