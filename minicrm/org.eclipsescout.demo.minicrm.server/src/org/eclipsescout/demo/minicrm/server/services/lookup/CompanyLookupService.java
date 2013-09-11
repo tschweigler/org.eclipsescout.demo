@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -25,7 +25,7 @@ public class CompanyLookupService extends AbstractSqlLookupService implements IC
         "WHERE   1=1 " +
         "  AND (C.TYPE_UID = :master OR :master IS NULL) " +
         "<key>   AND     C.COMPANY_NR = :key </key> " +
-        "<text>  AND     UPPER(C.NAME) LIKE UPPER(:text||'%') </text> " +
+        "<text>  AND     UPPER(C.NAME) LIKE UPPER(CONCAT(:text,'%')) </text> " +
         "<all> </all> ";
   }
 }
