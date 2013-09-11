@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -31,10 +31,10 @@ public class StandardOutlineService extends AbstractService implements IStandard
             " FROM COMPANY " +
             " WHERE 1 = 1 ");
     if (!StringUtility.isNullOrEmpty(formData.getShortName().getValue())) {
-      statement.append("AND UPPER(SHORT_NAME) LIKE UPPER(:shortName || '%') ");
+      statement.append("AND UPPER(SHORT_NAME) LIKE UPPER(CONCAT(:shortName,'%')) ");
     }
     if (!StringUtility.isNullOrEmpty(formData.getName().getValue())) {
-      statement.append("AND UPPER(NAME) LIKE UPPER(:name || '%')");
+      statement.append("AND UPPER(NAME) LIKE UPPER(CONCAT(:name,'%'))");
     }
     return SQL.select(statement.toString(), formData);
   }
@@ -46,10 +46,10 @@ public class StandardOutlineService extends AbstractService implements IStandard
     statement.append("SELECT PERSON_NR, LAST_NAME, FIRST_NAME FROM PERSON WHERE 1=1 ");
 
     if (!StringUtility.isNullOrEmpty(formData.getFirstName().getValue())) {
-      statement.append("AND UPPER(FIRST_NAME) LIKE UPPER(:firstName || '%') ");
+      statement.append("AND UPPER(FIRST_NAME) LIKE UPPER(CONCAT(:firstName,'%')) ");
     }
     if (!StringUtility.isNullOrEmpty(formData.getLastName().getValue())) {
-      statement.append("AND UPPER(LAST_NAME) LIKE UPPER(:lastName || '%') ");
+      statement.append("AND UPPER(LAST_NAME) LIKE UPPER(CONCAT(:lastName,'%')) ");
     }
     if (formData.getEmployer().getValue() != null) {
       statement.append("AND COMPANY_NR = :employer ");
