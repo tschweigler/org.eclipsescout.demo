@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -51,6 +51,7 @@ public class Activator extends Plugin {
   @Override
   public void start(BundleContext context) throws Exception {
     super.start(context);
+    System.out.println("Bundle started");
     plugin = this;
     //create the backend subject
     m_subject = new Subject();
