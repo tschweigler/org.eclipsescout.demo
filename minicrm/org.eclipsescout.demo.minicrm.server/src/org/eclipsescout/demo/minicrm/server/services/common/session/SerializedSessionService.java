@@ -13,6 +13,7 @@ package org.eclipsescout.demo.minicrm.server.services.common.session;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.serialization.IObjectSerializer;
@@ -23,14 +24,14 @@ import org.eclipse.scout.service.IService2;
 public class SerializedSessionService extends AbstractSessionStoreService implements IService2 {
 
   @Override
-  public void setAttribute(HttpServletRequest req, String key, Object value) {
+  public void setAttribute(HttpServletRequest req, HttpServletResponse res, String key, Object value) {
     if (value != null) {
       req.getSession().setAttribute(key, StringUtility.bytesToHex(serialize(value)));
     }
   }
 
   @Override
-  public Object getAttribute(HttpServletRequest req, String key) {
+  public Object getAttribute(HttpServletRequest req, HttpServletResponse res, String key) {
     String hex = (String) req.getSession().getAttribute(key);
     if (hex != null) {
       return deserialize(StringUtility.hexToBytes(hex));
