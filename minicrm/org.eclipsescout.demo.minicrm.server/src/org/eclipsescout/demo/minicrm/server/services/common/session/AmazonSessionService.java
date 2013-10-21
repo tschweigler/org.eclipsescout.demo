@@ -27,9 +27,8 @@ import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.commons.serialization.IObjectSerializer;
 import org.eclipse.scout.commons.serialization.SerializationUtility;
 import org.eclipse.scout.rt.server.services.common.session.AbstractSessionStoreService;
-import org.eclipse.scout.service.IService2;
 
-public class AmazonSessionService extends AbstractSessionStoreService implements IService2 {
+public class AmazonSessionService extends AbstractSessionStoreService {
 
   private static final IScoutLogger LOG = ScoutLogManager.getLogger(AmazonSessionService.class);
   String configEndpoint = "scoutcache.zjs9xm.cfg.use1.cache.amazonaws.com";

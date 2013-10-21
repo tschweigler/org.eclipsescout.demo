@@ -19,9 +19,8 @@ import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.serialization.IObjectSerializer;
 import org.eclipse.scout.commons.serialization.SerializationUtility;
 import org.eclipse.scout.rt.server.services.common.session.AbstractSessionStoreService;
-import org.eclipse.scout.service.IService2;
 
-public class SerializedSessionService extends AbstractSessionStoreService implements IService2 {
+public class SerializedSessionService extends AbstractSessionStoreService {
 
   @Override
   public void setAttribute(HttpServletRequest req, HttpServletResponse res, String key, Object value) {
