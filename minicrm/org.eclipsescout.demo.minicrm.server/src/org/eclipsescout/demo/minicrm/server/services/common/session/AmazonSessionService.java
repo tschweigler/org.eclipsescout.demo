@@ -32,8 +32,8 @@ import org.eclipse.scout.rt.server.services.common.session.AbstractSessionStoreS
 public class AmazonSessionService extends AbstractSessionStoreService {
 
   private static final IScoutLogger LOG = ScoutLogManager.getLogger(AmazonSessionService.class);
-  // String configEndpoint = "scoutcache.zjs9xm.cfg.use1.cache.amazonaws.com";
-  String configEndpoint = "localhost";
+  String configEndpoint = "scoutcache.zjs9xm.cfg.use1.cache.amazonaws.com";
+  //String configEndpoint = "localhost";
   String cookieStoreKey = "cookies";
   String cookieName = "clientid";
   Integer clusterPort = 11211;
