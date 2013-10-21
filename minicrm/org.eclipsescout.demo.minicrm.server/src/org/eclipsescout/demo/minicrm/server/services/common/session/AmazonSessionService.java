@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.spy.memcached.MemcachedClient;
 
+import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.commons.serialization.IObjectSerializer;
@@ -31,7 +32,8 @@ import org.eclipse.scout.rt.server.services.common.session.AbstractSessionStoreS
 public class AmazonSessionService extends AbstractSessionStoreService {
 
   private static final IScoutLogger LOG = ScoutLogManager.getLogger(AmazonSessionService.class);
-  String configEndpoint = "scoutcache.zjs9xm.cfg.use1.cache.amazonaws.com";
+  // String configEndpoint = "scoutcache.zjs9xm.cfg.use1.cache.amazonaws.com";
+  String configEndpoint = "localhost";
   String cookieStoreKey = "cookies";
   String cookieName = "clientid";
   Integer clusterPort = 11211;
@@ -55,14 +57,25 @@ public class AmazonSessionService extends AbstractSessionStoreService {
   public void setAttribute(HttpServletRequest req, HttpServletResponse res, String key, Object value) {
     if (value != null) {
       String clientid = getClientId(req, res);
-      client.set(clientid + '_' + key, cacheTime, serialize(value));
+      byte[] bytes = serialize(value);
+      String str = StringUtility.bytesToHex(bytes);
+      LOG.info("Speichern des Strings: \n" + str);
+      client.set(clientid + '_' + key, cacheTime, str);
     }
   }
 
   @Override
   public Object getAttribute(HttpServletRequest req, HttpServletResponse res, String key) {
     String clientid = getClientId(req, res);
-    return deserialize((byte[]) client.get(clientid + '_' + key));
+    String str = (String) client.get(clientid + '_' + key);
+    if (str != null) {
+      LOG.info("Laden des Strings : \n" + str);
+      byte[] bytes = StringUtility.hexToBytes(str);
+      return deserialize(bytes);
+    }
+    else {
+      return null;
+    }
   }
 
   private String getClientId(HttpServletRequest req, HttpServletResponse res) {
@@ -112,15 +125,17 @@ public class AmazonSessionService extends AbstractSessionStoreService {
   }
 
   private byte[] serialize(Object obj) {
-
+    LOG.info("Starte Serialisierung von" + obj.getClass().getName());
     byte[] bytes = null;
 
     try {
       IObjectSerializer objs = SerializationUtility.createObjectSerializer();
       bytes = objs.serialize(obj);
+      LOG.info("Serialisierung erfolgreich");
     }
     catch (IOException e) {
       e.printStackTrace();
+      LOG.info("Serialisierung fehlgeschlagen");
     }
     return bytes;
   }
