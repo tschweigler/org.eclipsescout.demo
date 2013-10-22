@@ -7,6 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: org.eclipsescout.demo.minicrm.server.Activator
 Export-Package: org.eclipsescout.demo.minicrm.server,
  org.eclipsescout.demo.minicrm.server.services,
+ org.eclipsescout.demo.minicrm.server.services.common.cache,
  org.eclipsescout.demo.minicrm.server.services.common.security,
  org.eclipsescout.demo.minicrm.server.services.common.session,
  org.eclipsescout.demo.minicrm.server.services.common.sql,
