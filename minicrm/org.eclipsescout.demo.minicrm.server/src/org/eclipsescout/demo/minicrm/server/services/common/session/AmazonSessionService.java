@@ -54,7 +54,6 @@ public class AmazonSessionService extends AbstractSessionStoreService {
     String clientid = getClientId(req, res);
     String str = (String) AmazonCache.getInstance().get(clientid + '_' + key);
     if (str != null) {
-      LOG.info("Laden des Strings : \n" + str);
       byte[] bytes = StringUtility.hexToBytes(str);
       return deserialize(bytes);
     }
