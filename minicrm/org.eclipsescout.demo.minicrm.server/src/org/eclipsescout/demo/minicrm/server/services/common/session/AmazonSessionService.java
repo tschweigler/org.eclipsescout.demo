@@ -12,7 +12,6 @@ package org.eclipsescout.demo.minicrm.server.services.common.session;
 
 import java.io.IOException;
 import java.math.BigInteger;
-import java.net.InetSocketAddress;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 
@@ -20,37 +19,23 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.spy.memcached.MemcachedClient;
-
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.commons.serialization.IObjectSerializer;
 import org.eclipse.scout.commons.serialization.SerializationUtility;
 import org.eclipse.scout.rt.server.services.common.session.AbstractSessionStoreService;
+import org.eclipsescout.demo.minicrm.server.services.common.cache.AmazonCache;
 
 public class AmazonSessionService extends AbstractSessionStoreService {
 
   private static final IScoutLogger LOG = ScoutLogManager.getLogger(AmazonSessionService.class);
-  String configEndpoint = "scoutcache.zjs9xm.cfg.use1.cache.amazonaws.com";
-  //String configEndpoint = "localhost";
+  Integer cacheTime = 3600;
   String cookieStoreKey = "cookies";
   String cookieName = "clientid";
-  Integer clusterPort = 11211;
-  Integer cacheTime = 3600;
-
-  MemcachedClient client;
 
   public AmazonSessionService() {
-    try {
-      LOG.info("Starte Initialisierung MemcachedClient");
-      client = new MemcachedClient(new InetSocketAddress(configEndpoint, clusterPort));
-      client.set(cookieStoreKey, cacheTime, new ArrayList<String>());
-      LOG.info("Initialisierung MemcachedClient abgeschlossen");
-    }
-    catch (IOException e) {
-      e.printStackTrace();
-    }
+    AmazonCache.getInstance().set(cookieStoreKey, cacheTime, new ArrayList<String>());
   }
 
   @Override
@@ -60,14 +45,14 @@ public class AmazonSessionService extends AbstractSessionStoreService {
       byte[] bytes = serialize(value);
       String str = StringUtility.bytesToHex(bytes);
       LOG.info("Speichern des Strings: \n" + str);
-      client.set(clientid + '_' + key, cacheTime, str);
+      AmazonCache.getInstance().set(clientid + '_' + key, cacheTime, str);
     }
   }
 
   @Override
   public Object getAttribute(HttpServletRequest req, HttpServletResponse res, String key) {
     String clientid = getClientId(req, res);
-    String str = (String) client.get(clientid + '_' + key);
+    String str = (String) AmazonCache.getInstance().get(clientid + '_' + key);
     if (str != null) {
       LOG.info("Laden des Strings : \n" + str);
       byte[] bytes = StringUtility.hexToBytes(str);
@@ -104,7 +89,7 @@ public class AmazonSessionService extends AbstractSessionStoreService {
       LOG.info("Neu ClientID erstellt: " + newClientId);
 
       @SuppressWarnings("unchecked")
-      ArrayList<String> existingClientIds = (ArrayList<String>) client.get(cookieStoreKey);
+      ArrayList<String> existingClientIds = (ArrayList<String>) AmazonCache.getInstance().get(cookieStoreKey);
       if (existingClientIds == null) {
         LOG.info("ClientID Array neu angelegt");
         existingClientIds = new ArrayList<String>();
@@ -115,7 +100,7 @@ public class AmazonSessionService extends AbstractSessionStoreService {
         res.addCookie(cookie);
         existingClientIds.add(newClientId);
         //TODO Sollte höhere Cachetime haben -> unendlich
-        client.set(cookieStoreKey, cacheTime, existingClientIds);
+        AmazonCache.getInstance().set(cookieStoreKey, cacheTime, existingClientIds);
         LOG.info("Neue ClientdId angelegt: " + cookie.getValue());
         return newClientId;
       }
@@ -134,8 +119,8 @@ public class AmazonSessionService extends AbstractSessionStoreService {
       LOG.info("Serialisierung erfolgreich");
     }
     catch (IOException e) {
-      e.printStackTrace();
       LOG.info("Serialisierung fehlgeschlagen");
+      throw new RuntimeException(e.getMessage());
     }
     return bytes;
   }

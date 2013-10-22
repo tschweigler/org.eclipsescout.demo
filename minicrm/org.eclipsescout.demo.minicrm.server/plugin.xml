@@ -40,6 +40,11 @@
             session="org.eclipsescout.demo.minicrm.server.ServerSession">
       </service>
       <service
+            factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
+            class="org.eclipsescout.demo.minicrm.server.services.common.cache.AmazonClientNotificationService"
+            session="org.eclipsescout.demo.minicrm.server.ServerSession">
+      </service>
+      <service
             class="org.eclipsescout.demo.minicrm.server.services.common.session.AmazonSessionService">
       </service>
    </extension>
