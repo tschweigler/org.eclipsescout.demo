@@ -40,7 +40,8 @@
             session="org.eclipsescout.demo.minicrm.server.ServerSession">
       </service>
       <service
-            class="org.eclipsescout.demo.minicrm.server.services.common.cache.AmazonClientNotificationService">
+            class="org.eclipsescout.demo.minicrm.server.services.common.cache.AmazonClientNotificationService"
+            ranking="100">
       </service>
       <service
             class="org.eclipsescout.demo.minicrm.server.services.common.session.AmazonSessionService">
