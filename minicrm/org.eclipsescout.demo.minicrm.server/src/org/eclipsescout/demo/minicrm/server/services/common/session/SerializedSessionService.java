@@ -16,15 +16,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.scout.commons.StringUtility;
+import org.eclipse.scout.commons.logger.IScoutLogger;
+import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.commons.serialization.IObjectSerializer;
 import org.eclipse.scout.commons.serialization.SerializationUtility;
 import org.eclipse.scout.rt.server.services.common.session.AbstractSessionStoreService;
 
 public class SerializedSessionService extends AbstractSessionStoreService {
 
+  private static final IScoutLogger LOG = ScoutLogManager.getLogger(AmazonSessionService.class);
+
   @Override
   public void setAttribute(HttpServletRequest req, HttpServletResponse res, String key, Object value) {
     if (value != null) {
+      LOG.info("Speichern der " + key);
       req.getSession().setAttribute(key, StringUtility.bytesToHex(serialize(value)));
     }
   }
@@ -33,6 +38,7 @@ public class SerializedSessionService extends AbstractSessionStoreService {
   public Object getAttribute(HttpServletRequest req, HttpServletResponse res, String key) {
     String hex = (String) req.getSession().getAttribute(key);
     if (hex != null) {
+      LOG.info("Laden der " + key);
       return deserialize(StringUtility.hexToBytes(hex));
     }
     else {

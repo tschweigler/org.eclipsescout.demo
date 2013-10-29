@@ -21,7 +21,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.scout.rt.jdbc.derby,
  org.eclipse.scout.jaxws216;bundle-version="2.1.6",
  com.bsiag.scout.rt.server.jdbc.mysql5117;bundle-version="5.1.17",
- org.eclipsescout.demo.minicrm.server.amazon.cache
+ org.eclipsescout.demo.minicrm.server.amazon.cache,
+ org.eclipsescout.demo.minicrm.server.amazon.sqs
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: javax.servlet;version="2.4.0",
  javax.servlet.http;version="2.4.0"

@@ -18,14 +18,13 @@ import net.spy.memcached.internal.OperationFuture;
 
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
-import org.eclipsescout.demo.minicrm.server.services.common.session.AmazonSessionService;
 
 /**
  *
  */
 public class AmazonCache {
 
-  private static final IScoutLogger LOG = ScoutLogManager.getLogger(AmazonSessionService.class);
+  private static final IScoutLogger LOG = ScoutLogManager.getLogger(AmazonCache.class);
   String configEndpoint = "scoutcache.zjs9xm.cfg.use1.cache.amazonaws.com";
   //String configEndpoint = "localhost";
   Integer clusterPort = 11211;

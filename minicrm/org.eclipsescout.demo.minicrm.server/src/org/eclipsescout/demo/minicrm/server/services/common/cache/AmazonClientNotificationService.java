@@ -25,10 +25,10 @@ import org.eclipse.scout.service.AbstractService;
 public class AmazonClientNotificationService extends AbstractService implements IClientNotificationService {
   private static final IScoutLogger LOG = ScoutLogManager.getLogger(AmazonClientNotificationService.class);
 
-  private AmazonClientNotificationQueue m_clientNotificationQueue;
+  private AmazonSQS m_clientNotificationQueue;
 
   public AmazonClientNotificationService() {
-    m_clientNotificationQueue = new AmazonClientNotificationQueue();
+    m_clientNotificationQueue = new AmazonSQS();
   }
 
   @Override
