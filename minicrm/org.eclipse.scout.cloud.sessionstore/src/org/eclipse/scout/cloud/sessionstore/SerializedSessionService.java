@@ -1,0 +1,90 @@
+/*******************************************************************************
+ * Copyright (c) 2013 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ ******************************************************************************/
+package org.eclipse.scout.cloud.sessionstore;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.eclipse.scout.cloud.sessionstore.amazon.AmazonSessionService;
+import org.eclipse.scout.commons.StringUtility;
+import org.eclipse.scout.commons.logger.IScoutLogger;
+import org.eclipse.scout.commons.logger.ScoutLogManager;
+import org.eclipse.scout.commons.serialization.IObjectSerializer;
+import org.eclipse.scout.commons.serialization.SerializationUtility;
+import org.eclipse.scout.http.servletfilter.session.ISessionStoreService;
+import org.eclipse.scout.service.AbstractService;
+
+/**
+ * This Session Service is for PaaS vendors with HTTP-Session synchronisation by servlet-container
+ * The Objects will simply be stored in the HTTP-Session, the synchronisation is will be done by the servlet container
+ * @author tsw
+ *
+ */
+public class SerializedSessionService extends AbstractService implements ISessionStoreService {
+
+  private static final IScoutLogger LOG = ScoutLogManager.getLogger(AmazonSessionService.class);
+
+  @Override
+  public void setAttribute(HttpServletRequest req, HttpServletResponse res, String key, Object value) {
+    if (value != null) {
+      LOG.info("Speichern der " + key);
+      req.getSession().setAttribute(key, StringUtility.bytesToHex(serialize(value)));
+    }
+  }
+
+  @Override
+  public Object getAttribute(HttpServletRequest req, HttpServletResponse res, String key) {
+    LOG.info("[2] Session ID: " + req.getSession().getId());
+    String hex = (String) req.getSession().getAttribute(key);
+    if (hex != null) {
+      LOG.info("Laden der " + key);
+      return deserialize(StringUtility.hexToBytes(hex));
+    }
+    else {
+      return null;
+    }
+  }
+
+  private byte[] serialize(Object obj) {
+
+    byte[] bytes = null;
+
+    try {
+      IObjectSerializer objs = SerializationUtility.createObjectSerializer();
+      bytes = objs.serialize(obj);
+    }
+    catch (IOException e) {
+      e.printStackTrace();
+    }
+    return bytes;
+  }
+
+  private Object deserialize(byte[] bytes) {
+
+    Object obj = null;
+
+    try {
+      if (bytes != null) {
+        IObjectSerializer objs = SerializationUtility.createObjectSerializer();
+        obj = objs.deserialize(bytes, Object.class);
+      }
+    }
+    catch (ClassNotFoundException e) {
+      e.printStackTrace();
+    }
+    catch (IOException e) {
+      e.printStackTrace();
+    }
+    return obj;
+  }
+}

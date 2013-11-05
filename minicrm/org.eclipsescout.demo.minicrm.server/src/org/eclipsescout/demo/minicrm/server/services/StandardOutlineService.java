@@ -10,11 +10,17 @@
  ******************************************************************************/
 package org.eclipsescout.demo.minicrm.server.services;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.eclipse.scout.service.AbstractService;
+import org.eclipse.scout.service.SERVICES;
+import org.eclipsescout.demo.minicrm.server.ServerSession;
 import org.eclipsescout.demo.minicrm.shared.services.IStandardOutlineService;
+import org.eclipsescout.demo.minicrm.shared.services.process.IUserProcessService;
 import org.eclipsescout.demo.minicrm.shared.ui.desktop.outlines.pages.searchform.CompanySearchFormData;
 import org.eclipsescout.demo.minicrm.shared.ui.desktop.outlines.pages.searchform.PersonSearchFormData;
 
@@ -58,5 +64,14 @@ public class StandardOutlineService extends AbstractService implements IStandard
       statement.append("AND COMPANY_NR IN (SELECT COMPANY_NR FROM COMPANY WHERE TYPE_UID = :employerType) ");
     }
     return SQL.select(statement.toString(), formData);
+  }
+
+  @Override
+  public String[] getOnlineUsers() throws ProcessingException {
+    Set<String> allUsers = SERVICES.getService(IUserProcessService.class).getUsersOnline();
+    Set<String> users = new HashSet<String>(allUsers);
+    // remove myself
+    users.remove(ServerSession.get().getUserId());
+    return users.toArray(new String[users.size()]);
   }
 }

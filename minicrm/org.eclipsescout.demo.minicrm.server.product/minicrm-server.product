@@ -56,9 +56,10 @@
       <plugin id="org.eclipse.scout.rt.server"/>
       <plugin id="org.eclipse.scout.rt.shared"/>
       <plugin id="org.eclipse.scout.service"/>
+      <plugin id="org.eclipse.scout.cloud.clientnotification"/>
+      <plugin id="org.eclipse.scout.cloud.sessionstore"/>
       <plugin id="org.eclipse.update.configurator"/>
       <plugin id="org.eclipsescout.demo.minicrm.server"/>
-      <plugin id="org.eclipsescout.demo.minicrm.server.amazon.cache"/>
       <plugin id="org.eclipsescout.demo.minicrm.shared"/>
    </plugins>
 

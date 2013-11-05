@@ -39,22 +39,48 @@
             class="org.eclipsescout.demo.minicrm.server.services.common.sql.MySqlSqlService"
             session="org.eclipsescout.demo.minicrm.server.ServerSession">
       </service>
-      <!--
+
       <service
-            class="org.eclipsescout.demo.minicrm.server.services.common.cache.AmazonClientNotificationService"
+            factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
+            class="org.eclipsescout.demo.minicrm.server.services.custom.security.AccessControlService"
+            session="org.eclipsescout.demo.minicrm.server.ServerSession">
+      </service>
+      <service
+            factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
+            class="org.eclipsescout.demo.minicrm.server.services.process.UserProcessService"
+            session="org.eclipsescout.demo.minicrm.server.ServerSession">
+      </service>
+      <service
+            factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
+            class="org.eclipsescout.demo.minicrm.server.services.process.NotificationProcessService"
+            session="org.eclipsescout.demo.minicrm.server.ServerSession">
+      </service>
+      <service
+            factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
+            class="org.eclipsescout.demo.minicrm.server.services.process.IconProcessService"
+            session="org.eclipsescout.demo.minicrm.server.ServerSession">
+      </service>
+      <service
+            factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
+            class="org.eclipsescout.demo.minicrm.server.services.process.PasswordProcessService"
+            session="org.eclipsescout.demo.minicrm.server.ServerSession">
+      </service>
+      <service
+            class="org.eclipse.scout.cloud.sessionstore.MemcachedSessionService">
+      </service>
+      <service
+            class="org.eclipse.scout.cloud.clientnotification.amazon.AmazonClientNotificationService"
             ranking="100">
       </service>
-      <service
-            class="org.eclipsescout.demo.minicrm.server.services.common.session.AmazonSessionService">
-      </service>
-      -->
-      <service
-            class="org.eclipsescout.demo.minicrm.server.services.common.session.SerializedSessionService">
-      </service>
+
    </extension>
    <extension
          name=""
          point="org.eclipse.equinox.http.registry.servlets">
+       <servlet
+            alias="/auth"
+            class="org.eclipsescout.demo.minicrm.server.servlet.MinicrmAuthenticationServlet">
+      </servlet>
       <servlet
             alias="/process"
             class="org.eclipse.scout.rt.server.ServiceTunnelServlet">
@@ -96,14 +122,22 @@
          name=""
          point="org.eclipse.scout.http.servletfilter.filters">
       <filter
-            aliases="/process /remotefiles /updatesite"
-            class="org.eclipse.scout.http.servletfilter.security.BasicSecurityFilter"
+            aliases="/process"
+            class="org.eclipsescout.demo.minicrm.server.security.BasicForwardSecurityFilter"
             ranking="20">
       </filter>
       <filter
-            aliases="/process /remotefiles /updatesite"
-            class="org.eclipse.scout.http.servletfilter.security.AnonymousSecurityFilter"
+            aliases="/"
+            class="org.eclipse.scout.rt.server.ServerJobServletFilter"
             ranking="30">
+         <init-param
+               name="active"
+               value="true">
+         </init-param>
+         <init-param
+               name="session"
+               value="org.eclipsescout.demo.minicrm.server.ServerSession">
+         </init-param>
       </filter>
    </extension>
    <extension

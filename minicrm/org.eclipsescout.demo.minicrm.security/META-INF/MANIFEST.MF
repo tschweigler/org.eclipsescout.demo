@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: BahBah Security Filter
+Bundle-SymbolicName: org.eclipsescout.demo.minicrm.security;singleton:=true
+Bundle-Version: 3.10.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.scout.http.servletfilter,
+ org.eclipse.scout.commons,
+ org.eclipse.scout.service,
+ org.eclipse.scout.cloud.sessionstore
+Import-Package: javax.servlet;version="2.4.0",
+ javax.servlet.http;version="2.4.0"
+Export-Package: org.eclipsescout.demo.minicrm.server.security

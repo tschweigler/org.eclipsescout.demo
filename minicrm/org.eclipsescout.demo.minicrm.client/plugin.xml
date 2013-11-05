@@ -16,6 +16,36 @@
             factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
             class="org.eclipsescout.demo.minicrm.shared.services.lookup.ICompanyLookupService">
       </proxy>
+            <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.demo.minicrm.shared.services.process.IUserProcessService">
+      </proxy>
+      <service
+            factory="org.eclipse.scout.rt.client.services.ClientServiceFactory"
+            class="org.eclipsescout.demo.minicrm.client.services.BahBahNotificationConsumerService"
+            session="org.eclipsescout.demo.minicrm.client.ClientSession">
+      </service>
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.demo.minicrm.shared.services.process.INotificationProcessService">
+      </proxy>
+      <service
+            factory="org.eclipse.scout.rt.client.services.ClientServiceFactory"
+            class="org.eclipsescout.demo.minicrm.client.services.BuddyIconProviderService"
+            session="org.eclipsescout.demo.minicrm.client.ClientSession">
+      </service>
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.demo.minicrm.shared.services.process.IIconProcessService">
+      </proxy>
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipsescout.demo.minicrm.shared.services.process.IPasswordProcessService">
+      </proxy>
+      <proxy
+            factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
+            class="org.eclipse.scout.rt.shared.services.common.pwd.IPasswordManagementService">
+      </proxy>
    </extension>
 
 </plugin>

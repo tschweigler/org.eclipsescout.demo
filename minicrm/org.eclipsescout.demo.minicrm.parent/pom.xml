@@ -27,10 +27,11 @@
   <name>minicrm - parent</name>
 
   <modules>
+  	<module>../org.eclipse.scout.cloud.clientnotification</module>
+  	<module>../org.eclipse.scout.cloud.sessionstore</module>
     <module>../org.eclipsescout.demo.minicrm.client</module>
     <module>../org.eclipsescout.demo.minicrm.client.mobile</module>
-    <module>../org.eclipsescout.demo.minicrm.server.amazon.cache</module>
-    <module>../org.eclipsescout.demo.minicrm.server.amazon.sqs</module>
+    <module>../org.eclipsescout.demo.minicrm.security</module>
     <module>../org.eclipsescout.demo.minicrm.server</module>
     <module>../org.eclipsescout.demo.minicrm.server.product</module>
     <module>../org.eclipsescout.demo.minicrm.shared</module>

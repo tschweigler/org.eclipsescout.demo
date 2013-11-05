@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Amazon
+Bundle-SymbolicName: org.eclipse.scout.cloud.clientnotification;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: lib/AmazonElastiCacheClusterClient-1.0.jar,lib/aws-java-sdk-1.6.0.jar,lib/commons-codec-1.8.jar,lib/commons-logging-1.1.1.jar,lib/httpclient-4.2.3.jar,lib/httpcore-4.2.jar
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: org.eclipse.scout.cloud.clientnotification.amazon
+Require-Bundle: org.eclipse.scout.commons,
+ org.eclipse.scout.rt.server,
+ org.eclipse.core.runtime;bundle-version="[3.4.0,4.0.0)"
