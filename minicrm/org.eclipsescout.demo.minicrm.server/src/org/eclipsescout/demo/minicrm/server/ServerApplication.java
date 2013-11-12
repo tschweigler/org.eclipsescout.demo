@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -12,8 +12,11 @@ package org.eclipsescout.demo.minicrm.server;
 
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
+import org.eclipse.scout.cloud.clientnotification.rabbitmq.RabbitMQClientNotificationConsumptionListenerJob;
+import org.eclipse.scout.cloud.clientnotification.rabbitmq.RabbitMQClientNotificationListenerJob;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
+import org.eclipse.scout.rt.server.scheduler.Scheduler;
 
 /**
  * Dummy application in order to manage server side product configurations in *.product files.
@@ -36,12 +39,13 @@ public class ServerApplication implements IApplication {
   @Override
   public Object start(IApplicationContext context) throws Exception {
     //start the scheduler
-    /*
-    Scheduler scheduler=new Scheduler(Activator.getDefault().getBackendSubject(),ServerSession.class);
-    scheduler.addJob(new LoadJobs());
+
+    Scheduler scheduler = new Scheduler(Activator.getDefault().getBackendSubject(), ServerSession.class);
+    scheduler.addJob(new RabbitMQClientNotificationListenerJob());
+    scheduler.addJob(new RabbitMQClientNotificationConsumptionListenerJob());
     scheduler.start();
     Activator.getDefault().setScheduler(scheduler);
-    */
+
     logger.info("minicrm server initialized");
     return EXIT_OK;
   }

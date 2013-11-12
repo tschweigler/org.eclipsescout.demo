@@ -4,8 +4,10 @@
    <extension
          point="org.eclipse.scout.service.services">
       <service
-            class="org.eclipse.scout.cloud.clientnotification.rabbitmq.RabbitMQClientNotificationService"
+            class="org.eclipse.scout.cloud.sessionstore.amazon.AmazonSessionService"
             createImmediately="false">
+      </service>
+      <service class="org.eclipse.scout.cloud.sessionstore.MemcachedSessionService">
       </service>
    </extension>
 

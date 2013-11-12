@@ -49,7 +49,7 @@ public class ClientSession extends AbstractClientSession implements Serializable
     setDesktop(new Desktop());
 
     // turn client notification polling on
-    getServiceTunnel().setClientNotificationPollInterval(1000L);
+    getServiceTunnel().setClientNotificationPollInterval(5000L);
 
     // set the notification listener service (this service will be called when the client receives a notification)
     IBahBahNotificationConsumerService notificationHandlerService = SERVICES.getService(IBahBahNotificationConsumerService.class);

@@ -66,13 +66,20 @@
             session="org.eclipsescout.demo.minicrm.server.ServerSession">
       </service>
       <service
-            class="org.eclipse.scout.cloud.sessionstore.MemcachedSessionService">
+            class="org.eclipse.scout.cloud.sessionstore.SerializedSessionService"
+            ranking="100">
       </service>
+
+      <service
+            class="org.eclipse.scout.cloud.clientnotification.rabbitmq.RabbitMQClientNotificationService"
+            ranking="100">
+      </service>
+      <!--
       <service
             class="org.eclipse.scout.cloud.clientnotification.amazon.AmazonClientNotificationService"
             ranking="100">
       </service>
-
+		-->
    </extension>
    <extension
          name=""
