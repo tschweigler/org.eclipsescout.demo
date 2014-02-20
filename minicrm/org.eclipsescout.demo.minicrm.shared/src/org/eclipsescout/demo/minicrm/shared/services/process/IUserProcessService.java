@@ -38,4 +38,8 @@ public interface IUserProcessService extends IService {
   void createUser(UserFormData formData) throws ProcessingException;
 
   void updateUser(UserFormData formData) throws ProcessingException;
+
+  void registerUserInternal(String userId) throws ProcessingException;
+
+  void unregisterUserInternal(String userName) throws ProcessingException;
 }

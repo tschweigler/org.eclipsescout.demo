@@ -18,6 +18,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
+import org.eclipsescout.demo.minicrm.client.ui.desktop.outlines.pages.ClusterSynchronizationStatusTablePage;
 import org.eclipsescout.demo.minicrm.client.ui.desktop.outlines.pages.UserAdministrationTablePage;
 import org.eclipsescout.demo.minicrm.shared.security.CreateUserPermission;
 import org.eclipsescout.demo.minicrm.shared.security.DeleteUserPermission;
@@ -34,7 +35,9 @@ public class AdministrationOutline extends AbstractOutline {
   @Override
   protected void execCreateChildPages(Collection<IPage> pageList) throws ProcessingException {
     UserAdministrationTablePage usersTablePage = new UserAdministrationTablePage();
+    ClusterSynchronizationStatusTablePage clusterTablePage = new ClusterSynchronizationStatusTablePage();
     pageList.add(usersTablePage);
+    pageList.add(clusterTablePage);
   }
 
   @Override

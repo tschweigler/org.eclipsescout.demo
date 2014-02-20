@@ -40,6 +40,17 @@ public class NotificationProcessService extends AbstractService implements INoti
 
     logger.info("queue 'update buddies' notification on server");
     IClientNotificationService service = SERVICES.getService(IClientNotificationService.class);
+    service.putDistributedNotification(new RefreshBuddiesNotification(), new AllUserFilter(TIMEOUT));
+  }
+
+  @Override
+  public void sendRefreshBuddiesInternal() throws ProcessingException {
+    if (!ACCESS.check(new CreateNotificationPermission())) {
+      throw new VetoException(TEXTS.get("AuthorizationFailed"));
+    }
+
+    logger.info("queue 'update buddies' notification on server");
+    IClientNotificationService service = SERVICES.getService(IClientNotificationService.class);
     service.putNotification(new RefreshBuddiesNotification(), new AllUserFilter(TIMEOUT));
   }
 
@@ -50,6 +61,6 @@ public class NotificationProcessService extends AbstractService implements INoti
     }
 
     IClientNotificationService service = SERVICES.getService(IClientNotificationService.class);
-    service.putNotification(new MessageNotification(ServerSession.get().getUserId(), message), new SingleUserFilter(buddyName, TIMEOUT));
+    service.putDistributedNotification(new MessageNotification(ServerSession.get().getUserId(), message), new SingleUserFilter(buddyName, TIMEOUT));
   }
 }

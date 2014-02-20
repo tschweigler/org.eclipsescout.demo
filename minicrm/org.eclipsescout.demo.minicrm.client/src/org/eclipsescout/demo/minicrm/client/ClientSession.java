@@ -11,18 +11,22 @@
 package org.eclipsescout.demo.minicrm.client;
 
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
 
+import org.eclipse.equinox.app.IApplication;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.client.AbstractClientSession;
 import org.eclipse.scout.rt.client.ClientJob;
 import org.eclipse.scout.rt.client.services.common.clientnotification.IClientNotificationConsumerService;
-import org.eclipse.scout.rt.client.servicetunnel.http.HttpServiceTunnel;
+import org.eclipse.scout.rt.client.servicetunnel.http.ClientHttpServiceTunnel;
 import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.service.SERVICES;
 import org.eclipsescout.demo.minicrm.client.services.IBahBahNotificationConsumerService;
 import org.eclipsescout.demo.minicrm.client.ui.desktop.Desktop;
+import org.eclipsescout.demo.minicrm.shared.services.process.IUserProcessService;
 
 public class ClientSession extends AbstractClientSession implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -41,7 +45,13 @@ public class ClientSession extends AbstractClientSession implements Serializable
 
   @Override
   public void execLoadSession() throws ProcessingException {
-    setServiceTunnel(new HttpServiceTunnel(this, getBundle().getBundleContext().getProperty("server.url")));
+    try {
+      setServiceTunnel(new ClientHttpServiceTunnel(this, new URL(getBundle().getBundleContext().getProperty("server.url"))));
+    }
+    catch (MalformedURLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
 
     //pre-load all known code types
     CODES.getAllCodeTypes(org.eclipsescout.demo.minicrm.shared.Activator.PLUGIN_ID);
@@ -49,7 +59,7 @@ public class ClientSession extends AbstractClientSession implements Serializable
     setDesktop(new Desktop());
 
     // turn client notification polling on
-    getServiceTunnel().setClientNotificationPollInterval(5000L);
+    getServiceTunnel().setClientNotificationPollInterval(1000L);
 
     // set the notification listener service (this service will be called when the client receives a notification)
     IBahBahNotificationConsumerService notificationHandlerService = SERVICES.getService(IBahBahNotificationConsumerService.class);
@@ -58,5 +68,17 @@ public class ClientSession extends AbstractClientSession implements Serializable
 
   @Override
   public void execStoreSession() throws ProcessingException {
+  }
+
+  @Override
+  public void stopSession() {
+    try {
+      SERVICES.getService(IUserProcessService.class).unregisterUser();
+    }
+    catch (ProcessingException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    stopSession(IApplication.EXIT_OK);
   }
 }

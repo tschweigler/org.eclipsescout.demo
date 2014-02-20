@@ -10,10 +10,7 @@
  ******************************************************************************/
 package org.eclipsescout.demo.minicrm.server;
 
-import javax.security.auth.Subject;
-
 import org.eclipse.core.runtime.Plugin;
-import org.eclipse.scout.commons.security.SimplePrincipal;
 import org.eclipse.scout.rt.server.scheduler.Scheduler;
 import org.osgi.framework.BundleContext;
 
@@ -33,10 +30,11 @@ public class Activator extends Plugin {
   }
 
   private Scheduler m_scheduler;
+
   /**
    * The subject used for backend activity, independent of any (client) user
    */
-  private Subject m_subject;
+  //private Subject m_subject;
 
   /**
    * The constructor
@@ -54,8 +52,9 @@ public class Activator extends Plugin {
     System.out.println("Bundle started");
     plugin = this;
     //create the backend subject
-    m_subject = new Subject();
-    m_subject.getPrincipals().add(new SimplePrincipal("server"));
+//    m_subject = new Subject();
+//    m_subject.getPrincipals().add(new SimplePrincipal("server"));
+
   }
 
   /*
@@ -72,9 +71,9 @@ public class Activator extends Plugin {
     super.stop(context);
   }
 
-  public Subject getBackendSubject() {
-    return m_subject;
-  }
+//  public Subject getBackendSubject() {
+//    return m_subject;
+//  }
 
   public Scheduler getScheduler() {
     return m_scheduler;

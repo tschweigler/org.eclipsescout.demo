@@ -123,8 +123,8 @@ public class ChatForm extends AbstractForm {
       private final Integer MESSAGE_TYPE_LOCAL = 1;
       private final Integer MESSAGE_TYPE_REMOTE = 2;
 
-      public void addMessage(boolean local, String sender, String receiver, Date date, String message) throws ProcessingException {
-        getTable().addRowByArray(new Object[]{(local ? MESSAGE_TYPE_LOCAL : MESSAGE_TYPE_REMOTE), sender, receiver, message, date});
+      public void addMessage(boolean local, String sender, String receiver, Date date, String message, String recievingNode, String providingNode) throws ProcessingException {
+        getTable().addRowByArray(new Object[]{(local ? MESSAGE_TYPE_LOCAL : MESSAGE_TYPE_REMOTE), sender, receiver, message, date, recievingNode, providingNode});
       }
 
       @Override
@@ -134,6 +134,14 @@ public class ChatForm extends AbstractForm {
 
       @Order(10.0)
       public class Table extends AbstractTable {
+
+        public ReceivingNodeColumn getReceivingNodeColumn() {
+          return getColumnSet().getColumnByClass(ReceivingNodeColumn.class);
+        }
+
+        public ProvidingNodeColumn getProvidingNodeColumn() {
+          return getColumnSet().getColumnByClass(ProvidingNodeColumn.class);
+        }
 
         @Override
         protected boolean getConfiguredMultilineText() {
@@ -260,6 +268,24 @@ public class ChatForm extends AbstractForm {
             return 0;
           }
         }
+
+        @Order(60.0)
+        public class ReceivingNodeColumn extends AbstractStringColumn {
+
+          @Override
+          protected String getConfiguredHeaderText() {
+            return TEXTS.get("ReceivingNode");
+          }
+        }
+
+        @Order(70.0)
+        public class ProvidingNodeColumn extends AbstractStringColumn {
+
+          @Override
+          protected String getConfiguredHeaderText() {
+            return TEXTS.get("ProvidingNode");
+          }
+        }
       }
     }
 
@@ -279,7 +305,8 @@ public class ChatForm extends AbstractForm {
           // send message to server
           SERVICES.getService(INotificationProcessService.class).sendMessage(getBuddyName(), message);
           // update local chat history
-          getHistoryField().addMessage(true, getUserName(), getBuddyName(), new Date(), message);
+
+          getHistoryField().addMessage(true, getUserName(), getBuddyName(), new Date(), message, "", "");
         }
         getMessageField().setValue(null);
       }

@@ -19,6 +19,7 @@ import org.eclipse.scout.commons.exception.VetoException;
 import org.eclipse.scout.commons.holders.IntegerHolder;
 import org.eclipse.scout.commons.holders.NVPair;
 import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
+import org.eclipse.scout.rt.server.services.common.notification.INotificationService;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.CODES;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
@@ -26,6 +27,8 @@ import org.eclipse.scout.rt.shared.services.common.security.ACCESS;
 import org.eclipse.scout.service.AbstractService;
 import org.eclipse.scout.service.SERVICES;
 import org.eclipsescout.demo.minicrm.server.ServerSession;
+import org.eclipsescout.demo.minicrm.server.services.notification.RegisterUserNotification;
+import org.eclipsescout.demo.minicrm.server.services.notification.UnregisterUserNotification;
 import org.eclipsescout.demo.minicrm.server.util.UserUtility;
 import org.eclipsescout.demo.minicrm.shared.security.CreateUserPermission;
 import org.eclipsescout.demo.minicrm.shared.security.DeleteUserPermission;
@@ -55,7 +58,18 @@ public class UserProcessService extends AbstractService implements IUserProcessS
     }
 
     m_users.add(ServerSession.get().getUserId());
-    SERVICES.getService(INotificationProcessService.class).sendRefreshBuddies();
+    SERVICES.getService(INotificationProcessService.class).sendRefreshBuddiesInternal();
+    SERVICES.getService(INotificationService.class).publishNotification(new RegisterUserNotification(ServerSession.get().getUserId()));
+  }
+
+  @Override
+  public void registerUserInternal(String userId) throws ProcessingException {
+    //TODO TSW [13] prüfen warum das mit der BackendSession nicht geht
+//    if (!ACCESS.check(new RegisterUserPermission())) {
+//      throw new VetoException(TEXTS.get("AuthorizationFailed"));
+//    }
+    m_users.add(userId);
+    SERVICES.getService(INotificationProcessService.class).sendRefreshBuddiesInternal();
   }
 
   @Override
@@ -65,7 +79,8 @@ public class UserProcessService extends AbstractService implements IUserProcessS
     }
 
     m_users.remove(ServerSession.get().getUserId());
-    SERVICES.getService(INotificationProcessService.class).sendRefreshBuddies();
+    SERVICES.getService(INotificationProcessService.class).sendRefreshBuddiesInternal();
+    SERVICES.getService(INotificationService.class).publishNotification(new UnregisterUserNotification(ServerSession.get().getUserId()));
   }
 
   @Override
@@ -132,5 +147,11 @@ public class UserProcessService extends AbstractService implements IUserProcessS
     SQL.selectInto("SELECT permission_id FROM TABUSERS WHERE username = :username INTO :permission", new NVPair("username", userName), new NVPair("permission", ih));
 
     return CODES.getCodeType(UserRoleCodeType.class).getCode(ih.getValue());
+  }
+
+  @Override
+  public void unregisterUserInternal(String userName) throws ProcessingException {
+    m_users.remove(userName);
+    SERVICES.getService(INotificationProcessService.class).sendRefreshBuddiesInternal();
   }
 }

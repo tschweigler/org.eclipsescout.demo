@@ -24,9 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.eclipse.scout.commons.Base64Utility;
 import org.eclipse.scout.commons.ConfigIniUtility;
 import org.eclipse.scout.commons.security.SimplePrincipal;
+import org.eclipse.scout.http.servletfilter.cache.ICacheStoreService;
 import org.eclipse.scout.http.servletfilter.security.AbstractChainableSecurityFilter;
 import org.eclipse.scout.http.servletfilter.security.PrincipalHolder;
-import org.eclipse.scout.http.servletfilter.session.ISessionStoreService;
 import org.eclipse.scout.service.SERVICES;
 
 public class BasicForwardSecurityFilter extends AbstractChainableSecurityFilter {
@@ -71,7 +71,7 @@ public class BasicForwardSecurityFilter extends AbstractChainableSecurityFilter 
         }
       }
     }
-    int attempts = getBasicAttempt(req,resp);
+    int attempts = getBasicAttempt(req, resp);
     if (attempts > 2) {
       return STATUS_CONTINUE_CHAIN;
     }
@@ -84,15 +84,15 @@ public class BasicForwardSecurityFilter extends AbstractChainableSecurityFilter 
 
   private int getBasicAttempt(HttpServletRequest req, HttpServletResponse res) {
     int basicAtttempt = 0;
-    Object attribute = SERVICES.getService(ISessionStoreService.class).getAttribute(req, res, PROP_BASIC_ATTEMPT);
+    Object attribute = SERVICES.getService(ICacheStoreService.class).getClientAttributeAndTouch(req, res, PROP_BASIC_ATTEMPT);
     if (attribute instanceof Integer) {
       basicAtttempt = ((Integer) attribute).intValue();
     }
     return basicAtttempt;
   }
 
-  private void setBasicAttept(HttpServletRequest req,HttpServletResponse res, int attempts) {
-	  SERVICES.getService(ISessionStoreService.class).setAttribute(req, res, PROP_BASIC_ATTEMPT, attempts);
+  private void setBasicAttept(HttpServletRequest req, HttpServletResponse res, int attempts) {
+    SERVICES.getService(ICacheStoreService.class).setClientAttribute(req, res, PROP_BASIC_ATTEMPT, attempts);
   }
 
   protected boolean validateUser(String user, String pass) throws ServletException {

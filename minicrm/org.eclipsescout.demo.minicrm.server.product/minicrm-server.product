@@ -30,6 +30,8 @@
 
 
    <plugins>
+      <plugin id="com.bsiag.scout.rt.server.jdbc.mysql5117"/>
+      <plugin id="com.mysql.jdbc_5117.fragment" fragment="true"/>
       <plugin id="javax.servlet"/>
       <plugin id="javax.xml"/>
       <plugin id="org.apache.commons.codec"/>
@@ -57,7 +59,7 @@
       <plugin id="org.eclipse.scout.rt.shared"/>
       <plugin id="org.eclipse.scout.service"/>
       <plugin id="org.eclipse.scout.cloud.clientnotification"/>
-      <plugin id="org.eclipse.scout.cloud.sessionstore"/>
+      <plugin id="org.eclipse.scout.cloud.cachestore"/>
       <plugin id="org.eclipse.update.configurator"/>
       <plugin id="org.eclipsescout.demo.minicrm.server"/>
       <plugin id="org.eclipsescout.demo.minicrm.shared"/>

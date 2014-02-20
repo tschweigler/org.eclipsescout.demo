@@ -21,6 +21,7 @@ import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.rt.server.AbstractServerSession;
 import org.eclipse.scout.rt.server.ServerJob;
+import org.eclipse.scout.rt.server.services.common.node.IBackendService;
 import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipse.scout.service.SERVICES;
 import org.eclipsescout.demo.minicrm.shared.services.process.IUserProcessService;
@@ -43,11 +44,15 @@ public class ServerSession extends AbstractServerSession implements Serializable
   @Override
   protected void execLoadSession() throws ProcessingException {
     //logger.info("created a new session for " + getUserId());
-    if (getUserId() != null && Subject.getSubject(AccessController.getContext()) != Activator.getDefault().getBackendSubject()) {
+    Subject backendSubject = SERVICES.getService(IBackendService.class).getBackendSubject();
+    Subject actualSubject = Subject.getSubject(AccessController.getContext());
+    if (getUserId() != null && !Subject.getSubject(AccessController.getContext()).equals(backendSubject)) {
       logger.info("created a new session for " + getUserId());
-      setPermission(SERVICES.getService(IUserProcessService.class).getUserPermission(getUserId()));
+      if (!getUserId().equals("server")) {
+        setPermission(SERVICES.getService(IUserProcessService.class).getUserPermission(getUserId()));
 
-      SERVICES.getService(IUserProcessService.class).registerUser();
+        SERVICES.getService(IUserProcessService.class).registerUser();
+      }
     }
   }
 
@@ -60,5 +65,23 @@ public class ServerSession extends AbstractServerSession implements Serializable
   @FormData
   public void setPermission(ICode<Integer> newValue) {
     setSharedContextVariable(IUserProcessService.PERMISSION_KEY, ICode.class, newValue);
+  }
+
+  @Override
+  public String getVirtualSessionId() {
+    return null;
+  }
+
+  @Override
+  public void setVirtualSessionId(String sessionId) {
+  }
+
+  @Override
+  public Subject getSubject() {
+    return null;
+  }
+
+  @Override
+  public void setSubject(Subject subject) {
   }
 }

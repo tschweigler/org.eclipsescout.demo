@@ -4,9 +4,9 @@
 <product name="minicrm Server" id="org.eclipsescout.demo.minicrm.server.product" application="org.eclipsescout.demo.minicrm.server.app" useFeatures="false" includeLaunchers="true">
 
    <configIni use="default">
-      <linux>/org.eclipsescout.demo.minicrm.server/products/development/config_8082.ini</linux>
-      <macosx>/org.eclipsescout.demo.minicrm.server/products/development/config_8082.ini</macosx>
-      <win32>/org.eclipsescout.demo.minicrm.server/products/development/config_8082.ini</win32>
+      <linux>/org.eclipsescout.demo.minicrm.server/products/development/config_8083.ini</linux>
+      <macosx>/org.eclipsescout.demo.minicrm.server/products/development/config_8083.ini</macosx>
+      <win32>/org.eclipsescout.demo.minicrm.server/products/development/config_8083.ini</win32>
    </configIni>
 
    <launcherArgs>

@@ -15,9 +15,9 @@
             session="org.eclipsescout.demo.minicrm.server.ServerSession">
       </service>
       <service
-            factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
+
             class="org.eclipsescout.demo.minicrm.server.services.common.security.AccessControlService"
-            session="org.eclipsescout.demo.minicrm.server.ServerSession">
+            >
       </service>
       <service
             factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
@@ -66,20 +66,20 @@
             session="org.eclipsescout.demo.minicrm.server.ServerSession">
       </service>
       <service
-            class="org.eclipse.scout.cloud.sessionstore.SerializedSessionService"
+            class="org.eclipse.scout.cloud.cachestore.MemcachedCacheService"
             ranking="100">
       </service>
 
       <service
-            class="org.eclipse.scout.cloud.clientnotification.rabbitmq.RabbitMQClientNotificationService"
+            class="org.eclipse.scout.cloud.notification.activemq.ActiveMQMessageService"
             ranking="100">
       </service>
-      <!--
+<!--
       <service
-            class="org.eclipse.scout.cloud.clientnotification.amazon.AmazonClientNotificationService"
+            class="org.eclipse.scout.cloud.notification.rabbitmq.RabbitMQMessageService"
             ranking="100">
       </service>
-		-->
+	-->
    </extension>
    <extension
          name=""

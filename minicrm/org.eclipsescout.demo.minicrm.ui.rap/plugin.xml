@@ -93,6 +93,12 @@
   <extension point="org.eclipse.scout.http.servletfilter.filters">
     <filter
       aliases="/"
+      class="org.eclipsescout.demo.minicrm.server.security.BasicForwardSecurityFilter"
+      ranking="20">
+    </filter>
+    <!--
+    <filter
+      aliases="/"
       class="org.eclipse.scout.http.servletfilter.security.AnonymousSecurityFilter"
       ranking="10">
     </filter>
@@ -101,6 +107,7 @@
       class="org.eclipse.scout.http.servletfilter.security.BasicSecurityFilter"
       ranking="20">
     </filter>
+    -->
   </extension>
   <extension point="org.eclipse.equinox.http.registry.servlets">
     <servlet

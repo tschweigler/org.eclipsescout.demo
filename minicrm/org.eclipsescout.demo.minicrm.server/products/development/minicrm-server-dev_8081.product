@@ -62,8 +62,8 @@
       <plugin id="org.eclipse.jetty.util"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
-      <plugin id="org.eclipse.scout.cloud.clientnotification"/>
-      <plugin id="org.eclipse.scout.cloud.sessionstore"/>
+      <plugin id="org.eclipse.scout.cloud.notification"/>
+      <plugin id="org.eclipse.scout.cloud.cachestore"/>
       <plugin id="org.eclipse.scout.commons"/>
       <plugin id="org.eclipse.scout.http.servletfilter"/>
       <plugin id="org.eclipse.scout.jaxws216"/>

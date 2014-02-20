@@ -38,7 +38,9 @@ public class BahBahNotificationConsumerService extends AbstractService implement
       try {
         ChatForm form = userPage.getChatForm(buddy);
         if (form != null) {
-          form.getHistoryField().addMessage(false, buddy, form.getUserName(), new Date(), notification.getMessage());
+          String receiveingNode = notification.getReceiveingServerNodeId().substring(0, 5);
+          String providingNode = notification.getProvidingServerNodeId().substring(0, 5);
+          form.getHistoryField().addMessage(false, buddy, form.getUserName(), new Date(), notification.getMessage(), receiveingNode, providingNode);
         }
       }
       catch (Throwable t) {
