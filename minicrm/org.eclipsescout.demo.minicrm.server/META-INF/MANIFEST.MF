@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipsescout.demo.minicrm.server
 Bundle-SymbolicName: org.eclipsescout.demo.minicrm.server;singleton:=true
-Bundle-Version: 3.10.0.qualifier
+Bundle-Version: 4.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.eclipsescout.demo.minicrm.server.Activator
 Export-Package: org.eclipsescout.demo.minicrm.server,
@@ -13,16 +13,15 @@ Export-Package: org.eclipsescout.demo.minicrm.server,
  org.eclipsescout.demo.minicrm.server.ui.desktop.form
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipsescout.demo.minicrm.shared,
- org.eclipse.scout.cloud.cachestore,
  org.eclipse.scout.rt.server,
- org.eclipse.scout.http.servletfilter,
  org.eclipse.equinox.http.registry,
- org.eclipse.scout.rt.jdbc.derby,
- org.eclipse.scout.jaxws216;bundle-version="2.1.6",
  com.bsiag.scout.rt.server.jdbc.mysql5117;bundle-version="5.1.17",
  org.eclipsescout.demo.minicrm.security,
- org.eclipse.scout.cloud.notification;bundle-version="1.0.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+ org.eclipse.scout.cloud.cachestore.memcached;bundle-version="4.0.0",
+ org.eclipse.scout.cloud.notification.rabbitmq;bundle-version="4.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: javax.servlet;version="2.4.0",
- javax.servlet.http;version="2.4.0"
+ javax.servlet.http;version="2.4.0",
+ org.eclipse.scout.http.servletfilter,
+ org.eclipse.scout.rt.server.commons.servletfilter
 Bundle-ActivationPolicy: lazy

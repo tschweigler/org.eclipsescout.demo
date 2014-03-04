@@ -14,25 +14,16 @@ import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.FormData.SdkCommand;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractLongColumn;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
-import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
-import org.eclipse.scout.rt.client.ui.form.fields.plannerfield.AbstractPlannerField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
-import org.eclipse.scout.rt.extension.client.ui.basic.activitymap.AbstractExtensibleActivityMap;
-import org.eclipse.scout.rt.extension.client.ui.basic.table.AbstractExtensibleTable;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.service.SERVICES;
-import org.eclipsescout.demo.minicrm.client.ui.forms.UserForm.MainBox.PlannerTestField;
-import org.eclipsescout.demo.minicrm.client.ui.forms.UserForm.MainBox.PlannerTestField.ActivityMap;
-import org.eclipsescout.demo.minicrm.client.ui.forms.UserForm.MainBox.PlannerTestField.ResourceTable;
 import org.eclipsescout.demo.minicrm.client.ui.forms.UserForm.MainBox.UserBox.CancelButton;
 import org.eclipsescout.demo.minicrm.client.ui.forms.UserForm.MainBox.UserBox.OkButton;
 import org.eclipsescout.demo.minicrm.client.ui.forms.UserForm.MainBox.UserBox.PasswordField;
@@ -89,10 +80,6 @@ public class UserForm extends AbstractForm {
     return getFieldByClass(PasswordField.class);
   }
 
-  public PlannerTestField getPlannerTestField() {
-    return getFieldByClass(PlannerTestField.class);
-  }
-
   public UserRoleField getUserRoleField() {
     return getFieldByClass(UserRoleField.class);
   }
@@ -120,21 +107,6 @@ public class UserForm extends AbstractForm {
       @Override
       protected String getConfiguredLabel() {
         return TEXTS.get("User");
-      }
-
-      public class tstButton extends AbstractButton {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return "test Split";
-        }
-
-        @Override
-        protected void execClickAction() throws ProcessingException {
-          //getPlannerTestField().setSplitterPosition(299);
-          getPlannerTestField().setSplitterPosition(300);
-        }
-
       }
 
       @Order(10.0)
@@ -201,7 +173,7 @@ public class UserForm extends AbstractForm {
         }
 
         @Override
-        protected Class<? extends ICodeType<Integer>> getConfiguredCodeType() {
+        protected Class<? extends ICodeType<Integer, Integer>> getConfiguredCodeType() {
           return UserRoleCodeType.class;
         }
 
@@ -225,67 +197,6 @@ public class UserForm extends AbstractForm {
       }
     }
 
-    @Order(20.0)
-    public class PlannerTestField extends AbstractPlannerField<ResourceTable, ActivityMap, Long, Long> {
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("PlannerTest");
-      }
-
-      @Override
-      protected Object[][] execLoadActivityMapData(Long[] resourceIds, ITableRow[] resourceRows) throws ProcessingException {
-        return new Object[0][];
-      }
-
-      @Order(10.0)
-      public class ResourceTable extends AbstractExtensibleTable {
-
-        @Order(10.0f)
-        public class ResourceIdColumn extends AbstractLongColumn {
-
-          @Override
-          protected String getConfiguredHeaderText() {
-            return "ResourceId";
-          }
-
-          @Override
-          protected boolean getConfiguredDisplayable() {
-            return true;
-          }
-
-          @Override
-          protected boolean getConfiguredPrimaryKey() {
-            return true;
-          }
-        }
-
-        @Override
-        protected boolean getConfiguredAutoResizeColumns() {
-          return true;
-        }
-
-        @Override
-        protected boolean getConfiguredSortEnabled() {
-          return false;
-        }
-      }
-
-      @Override
-      protected int getConfiguredGridH() {
-        return 5;
-      }
-
-      @Override
-      protected int getConfiguredMiniCalendarCount() {
-        return 1;
-      }
-
-      @Order(10.0)
-      public class ActivityMap extends AbstractExtensibleActivityMap<Long, Long> {
-
-      }
-    }
   }
 
   public class ModifyHandler extends AbstractFormHandler {

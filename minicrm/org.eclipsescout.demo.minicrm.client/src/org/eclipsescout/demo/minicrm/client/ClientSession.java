@@ -4,16 +4,14 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
 package org.eclipsescout.demo.minicrm.client;
 
 import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.URL;
-
+import org.eclipse.scout.commons.UriUtility;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
@@ -45,13 +43,8 @@ public class ClientSession extends AbstractClientSession implements Serializable
 
   @Override
   public void execLoadSession() throws ProcessingException {
-    try {
-      setServiceTunnel(new ClientHttpServiceTunnel(this, new URL(getBundle().getBundleContext().getProperty("server.url"))));
-    }
-    catch (MalformedURLException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+    setServiceTunnel(new ClientHttpServiceTunnel(this, UriUtility.toUrl(getBundle().getBundleContext().getProperty("server.url"))));
+
 
     //pre-load all known code types
     CODES.getAllCodeTypes(org.eclipsescout.demo.minicrm.shared.Activator.PLUGIN_ID);

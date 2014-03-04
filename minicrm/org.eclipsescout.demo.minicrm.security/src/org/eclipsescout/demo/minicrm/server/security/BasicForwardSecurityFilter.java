@@ -24,9 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.eclipse.scout.commons.Base64Utility;
 import org.eclipse.scout.commons.ConfigIniUtility;
 import org.eclipse.scout.commons.security.SimplePrincipal;
-import org.eclipse.scout.http.servletfilter.cache.ICacheStoreService;
-import org.eclipse.scout.http.servletfilter.security.AbstractChainableSecurityFilter;
-import org.eclipse.scout.http.servletfilter.security.PrincipalHolder;
+import org.eclipse.scout.rt.server.commons.cache.ICacheStoreService;
+import org.eclipse.scout.rt.server.commons.servletfilter.security.AbstractChainableSecurityFilter;
+import org.eclipse.scout.rt.server.commons.servletfilter.security.PrincipalHolder;
 import org.eclipse.scout.service.SERVICES;
 
 public class BasicForwardSecurityFilter extends AbstractChainableSecurityFilter {

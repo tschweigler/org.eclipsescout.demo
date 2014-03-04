@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -25,7 +25,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractTimeField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipsescout.demo.widgets.client.services.lookup.TimezonesLookupCall;
 import org.eclipsescout.demo.widgets.client.ui.forms.DateFieldForm.MainBox.CloseButton;
 import org.eclipsescout.demo.widgets.client.ui.forms.DateFieldForm.MainBox.GroupBox;
@@ -99,7 +99,7 @@ public class DateFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
+        protected Class<? extends ILookupCall<TimeZone>> getConfiguredLookupCall() {
           return TimezonesLookupCall.class;
         }
 
@@ -175,10 +175,10 @@ public class DateFieldForm extends AbstractForm implements IPageForm {
           return TEXTS.get("TimeField");
         }
 
-        @Override
-        protected void execInitField() throws ProcessingException {
-          setValue(new Date());
-        }
+//        @Override
+//        protected void execInitField() throws ProcessingException {
+//          setValue(new Date());
+//        }
       }
     }
 

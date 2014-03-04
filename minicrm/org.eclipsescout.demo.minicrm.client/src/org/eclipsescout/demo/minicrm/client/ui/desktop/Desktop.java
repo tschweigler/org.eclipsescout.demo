@@ -11,7 +11,9 @@
 package org.eclipsescout.demo.minicrm.client.ui.desktop;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ClientSyncJob;
@@ -38,14 +40,13 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
   public Desktop() {
   }
 
-  @SuppressWarnings("unchecked")
   @Override
-  protected Class<? extends IOutline>[] getConfiguredOutlines() {
-    ArrayList<Class> outlines = new ArrayList<Class>();
+  protected List<Class<? extends IOutline>> getConfiguredOutlines() {
+    List<Class<? extends IOutline>> outlines = new ArrayList<Class<? extends IOutline>>();
     outlines.add(StandardOutline.class);
     outlines.add(ChatOutline.class);
     outlines.add(AdministrationOutline.class);
-    return outlines.toArray(new Class[outlines.size()]);
+    return outlines;
   }
 
   @Override
@@ -55,23 +56,23 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
 
   @Override
   protected void execOpened() throws ProcessingException {
-
     //If it is a mobile or tablet device, the DesktopExtension in the mobile plugin takes care of starting the correct forms.
     if (!UserAgentUtility.isDesktopDevice()) {
       return;
     }
     // outline tree
     DefaultOutlineTreeForm treeForm = new DefaultOutlineTreeForm();
-    treeForm.setIconId(Icons.EclipseScout);
+    treeForm.setIconId(Icons.VCard);
     treeForm.startView();
 
     //outline table
     DefaultOutlineTableForm tableForm = new DefaultOutlineTableForm();
-    tableForm.setIconId(Icons.EclipseScout);
+    tableForm.setIconId(Icons.VCard);
     tableForm.startView();
 
-    if (getAvailableOutlines().length > 0) {
-      setOutline(getAvailableOutlines()[0]);
+    IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
+    if (firstOutline != null) {
+      setOutline(firstOutline);
     }
 
   }
@@ -140,10 +141,10 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
       super(Desktop.this, StandardOutline.class);
     }
 
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("StandardOutline");
-    }
+//    @Override
+//    protected String getConfiguredText() {
+//      return TEXTS.get("StandardOutline");
+//    }
   }
 
   @Order(20.0)
@@ -152,10 +153,10 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
       super(Desktop.this, ChatOutline.class);
     }
 
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("Chat");
-    }
+//    @Override
+//    protected String getConfiguredText() {
+//      return TEXTS.get("Chat");
+//    }
   }
 
   @Order(30.0)
@@ -164,9 +165,9 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
       super(Desktop.this, AdministrationOutline.class);
     }
 
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("Administration");
-    }
+//    @Override
+//    protected String getConfiguredText() {
+//     return TEXTS.get("Administration");
+//    }
   }
 }

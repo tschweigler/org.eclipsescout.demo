@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
-import org.eclipse.scout.http.servletfilter.HttpServletEx;
+import org.eclipse.scout.rt.server.commons.servletfilter.HttpServletEx;
 import org.eclipsescout.demo.minicrm.server.util.UserUtility;
 
 /**

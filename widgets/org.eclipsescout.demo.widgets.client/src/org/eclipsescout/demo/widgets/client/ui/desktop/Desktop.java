@@ -11,7 +11,9 @@
 package org.eclipsescout.demo.widgets.client.ui.desktop;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
@@ -45,13 +47,12 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
   public Desktop() {
   }
 
-  @SuppressWarnings("unchecked")
   @Override
-  protected Class<? extends IOutline>[] getConfiguredOutlines() {
-    ArrayList<Class> outlines = new ArrayList<Class>();
+  protected List<Class<? extends IOutline>> getConfiguredOutlines() {
+    List<Class<? extends IOutline>> outlines = new ArrayList<Class<? extends IOutline>>();
     outlines.add(WidgetsOutline.class);
     outlines.add(PagesSearchFormsOutline.class);
-    return outlines.toArray(new Class[outlines.size()]);
+    return outlines;
   }
 
   @Override
@@ -76,8 +77,9 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
     tableForm.setIconId(Icons.EclipseScout);
     tableForm.startView();
 
-    if (getAvailableOutlines().length > 0) {
-      setOutline(getAvailableOutlines()[0]);
+    IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
+    if (firstOutline != null) {
+      setOutline(firstOutline);
     }
 
   }
@@ -122,6 +124,11 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
       }
 
       @Override
+      protected void execPrepareAction() throws ProcessingException {
+        super.execPrepareAction();
+      }
+
+      @Override
       protected void execAction() throws ProcessingException {
         String menuname = this.getClass().getSimpleName();
         MessageBox.showOkMessage("Clicked on Menu", "You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"", null);
@@ -130,10 +137,18 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
 
     @Order(20.0)
     public class MenuWithIconMenu extends AbstractMenu {
+      private int counter = 0;
 
       @Override
       protected String getConfiguredIconId() {
         return AbstractIcons.Gears;
+      }
+
+      @Override
+      protected void execPrepareAction() throws ProcessingException {
+        super.execPrepareAction();
+        setText(getConfiguredText() + " " + (counter++));
+
       }
 
       @Override
@@ -157,6 +172,11 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
       }
 
       @Override
+      protected void execAction() {
+        System.out.println("execAction");
+      }
+
+      @Override
       protected void execToggleAction(boolean selected) throws ProcessingException {
         super.execToggleAction(selected);
         if (selected == true) {
@@ -171,6 +191,12 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
       @Override
       protected String getConfiguredText() {
         return TEXTS.get("MenuWithMenus");
+      }
+
+      @Override
+      protected void execAction() throws ProcessingException {
+        String menuname = this.getClass().getSimpleName();
+        MessageBox.showOkMessage("Clicked on Menu", "You have clicked on \"" + TEXTS.get(menuname.substring(0, menuname.length() - 4)) + "\"", null);
       }
 
       @Order(10.0)
@@ -333,10 +359,6 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
       super(Desktop.this, WidgetsOutline.class);
     }
 
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("TestCases");
-    }
   }
 
   @Order(20.0)
@@ -345,9 +367,5 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
       super(Desktop.this, PagesSearchFormsOutline.class);
     }
 
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("PagesSearchForms");
-    }
   }
 }

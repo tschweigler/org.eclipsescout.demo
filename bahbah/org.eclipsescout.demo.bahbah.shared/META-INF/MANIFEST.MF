@@ -2,11 +2,12 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipsescout.demo.bahbah.shared
 Bundle-SymbolicName: org.eclipsescout.demo.bahbah.shared;singleton:=true
-Bundle-Version: 3.10.0.qualifier
+Bundle-Version: 4.0.0.qualifier
 Bundle-Activator: org.eclipsescout.demo.bahbah.shared.Activator
 Export-Package: org.eclipsescout.demo.bahbah.shared,
  org.eclipsescout.demo.bahbah.shared.notification,
  org.eclipsescout.demo.bahbah.shared.security,
+ org.eclipsescout.demo.bahbah.shared.services,
  org.eclipsescout.demo.bahbah.shared.services.code,
  org.eclipsescout.demo.bahbah.shared.services.common.text,
  org.eclipsescout.demo.bahbah.shared.services.outline,

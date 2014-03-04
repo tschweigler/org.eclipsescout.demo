@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipsescout.demo.minicrm.shared.services.process;
 
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.scout.commons.exception.ProcessingException;
@@ -33,7 +34,7 @@ public interface IUserProcessService extends IService {
 
   Object[][] getUsers() throws ProcessingException;
 
-  void deleteUser(Long[] u_id) throws ProcessingException;
+  void deleteUser(List<Long> u_id) throws ProcessingException;
 
   void createUser(UserFormData formData) throws ProcessingException;
 

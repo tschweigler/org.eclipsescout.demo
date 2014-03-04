@@ -10,11 +10,13 @@
  ******************************************************************************/
 package org.eclipsescout.demo.minicrm.server.services.lookup;
 
+import java.math.BigDecimal;
+
 import org.eclipse.scout.rt.server.services.lookup.AbstractSqlLookupService;
 import org.eclipsescout.demo.minicrm.shared.Icons;
 import org.eclipsescout.demo.minicrm.shared.services.lookup.ICompanyLookupService;
 
-public class CompanyLookupService extends AbstractSqlLookupService implements ICompanyLookupService {
+public class CompanyLookupService extends AbstractSqlLookupService<BigDecimal> implements ICompanyLookupService {
 
   @Override
   public String getConfiguredSqlSelect() {

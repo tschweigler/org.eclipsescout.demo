@@ -30,7 +30,10 @@
 
    <plugins>
       <plugin id="com.ibm.icu"/>
+      <plugin id="com.mysql.jdbc_5117.fragment" fragment="true"/>
+      <plugin id="javax.servlet"/>
       <plugin id="javax.xml"/>
+      <plugin id="org.apache.ant"/>
       <plugin id="org.apache.batik.bridge"/>
       <plugin id="org.apache.batik.css"/>
       <plugin id="org.apache.batik.dom"/>
@@ -45,6 +48,8 @@
       <plugin id="org.apache.batik.xml"/>
       <plugin id="org.apache.commons.codec"/>
       <plugin id="org.apache.commons.logging"/>
+      <plugin id="org.apache.derby.jdbc_1091.fragment" fragment="true"/>
+      <plugin id="org.easymock"/>
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.databinding"/>
@@ -53,7 +58,10 @@
       <plugin id="org.eclipse.core.expressions"/>
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.net"/>
+      <plugin id="org.eclipse.core.net.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.core.runtime.compatibility"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.emf.common"/>
       <plugin id="org.eclipse.emf.ecore"/>
       <plugin id="org.eclipse.emf.ecore.xmi"/>
@@ -69,6 +77,7 @@
       <plugin id="org.eclipse.equinox.servletbridge"/>
       <plugin id="org.eclipse.help"/>
       <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.osgi.compatibility.state" fragment="true"/>
       <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.rap.jface"/>
       <plugin id="org.eclipse.rap.jface.databinding"/>
@@ -78,28 +87,48 @@
       <plugin id="org.eclipse.rap.ui.forms"/>
       <plugin id="org.eclipse.rap.ui.workbench"/>
       <plugin id="org.eclipse.scout.commons"/>
-      <plugin id="org.eclipse.scout.http.servletfilter"/>
+      <plugin id="org.eclipse.scout.commons.log4j.bridge.fragment" fragment="true"/>
+      <plugin id="org.eclipse.scout.commons.test" fragment="true"/>
       <plugin id="org.eclipse.scout.net"/>
       <plugin id="org.eclipse.scout.rt.client"/>
       <plugin id="org.eclipse.scout.rt.client.mobile"/>
+      <plugin id="org.eclipse.scout.rt.client.test" fragment="true"/>
+      <plugin id="org.eclipse.scout.rt.client.testenvironment"/>
       <plugin id="org.eclipse.scout.rt.extension.client"/>
+      <plugin id="org.eclipse.scout.rt.extension.client.test" fragment="true"/>
+      <plugin id="org.eclipse.scout.rt.server.commons"/>
+      <plugin id="org.eclipse.scout.rt.servicetunnel"/>
       <plugin id="org.eclipse.scout.rt.shared"/>
+      <plugin id="org.eclipse.scout.rt.shared.test" fragment="true"/>
+      <plugin id="org.eclipse.scout.rt.testing.client"/>
+      <plugin id="org.eclipse.scout.rt.testing.client.test" fragment="true"/>
+      <plugin id="org.eclipse.scout.rt.testing.common.ant.optional.junit.fragment" fragment="true"/>
+      <plugin id="org.eclipse.scout.rt.testing.commons"/>
+      <plugin id="org.eclipse.scout.rt.testing.shared"/>
+      <plugin id="org.eclipse.scout.rt.testing.shared.test" fragment="true"/>
       <plugin id="org.eclipse.scout.rt.ui.rap"/>
       <plugin id="org.eclipse.scout.rt.ui.rap.mobile"/>
+      <plugin id="org.eclipse.scout.rt.ui.rap.test" fragment="true"/>
       <plugin id="org.eclipse.scout.rt.ui.rap.theme.rayo"/>
       <plugin id="org.eclipse.scout.rt.ui.rap.theme.rayo.mobile" fragment="true"/>
       <plugin id="org.eclipse.scout.rt.ui.svg.calendar"/>
       <plugin id="org.eclipse.scout.service"/>
+      <plugin id="org.eclipse.scout.service.test" fragment="true"/>
       <plugin id="org.eclipse.scout.svg.client"/>
       <plugin id="org.eclipse.scout.svg.ui.rap"/>
       <plugin id="org.eclipse.update.configurator"/>
       <plugin id="org.eclipsescout.demo.minicrm.client"/>
       <plugin id="org.eclipsescout.demo.minicrm.client.mobile"/>
+      <plugin id="org.eclipsescout.demo.minicrm.security"/>
       <plugin id="org.eclipsescout.demo.minicrm.shared"/>
       <plugin id="org.eclipsescout.demo.minicrm.ui.rap"/>
+      <plugin id="org.hamcrest.core"/>
+      <plugin id="org.junit"/>
       <plugin id="org.w3c.css.sac"/>
+      <plugin id="org.w3c.dom.events"/>
       <plugin id="org.w3c.dom.smil"/>
       <plugin id="org.w3c.dom.svg"/>
+      <plugin id="org.w3c.dom.svg.fragment" fragment="true"/>
    </plugins>
 
 

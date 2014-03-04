@@ -69,17 +69,17 @@
             class="org.eclipse.scout.cloud.cachestore.MemcachedCacheService"
             ranking="100">
       </service>
-
+<!--
       <service
             class="org.eclipse.scout.cloud.notification.activemq.ActiveMQMessageService"
             ranking="100">
       </service>
-<!--
+-->
       <service
             class="org.eclipse.scout.cloud.notification.rabbitmq.RabbitMQMessageService"
             ranking="100">
       </service>
-	-->
+
    </extension>
    <extension
          name=""
@@ -127,7 +127,7 @@
    </extension>
    <extension
          name=""
-         point="org.eclipse.scout.http.servletfilter.filters">
+         point="org.eclipse.scout.rt.server.commons.filters">
       <filter
             aliases="/process"
             class="org.eclipsescout.demo.minicrm.server.security.BasicForwardSecurityFilter"

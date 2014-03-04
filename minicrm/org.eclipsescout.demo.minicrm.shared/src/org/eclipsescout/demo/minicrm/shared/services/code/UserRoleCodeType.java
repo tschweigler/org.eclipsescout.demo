@@ -16,7 +16,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 
-public class UserRoleCodeType extends AbstractCodeType<Integer> {
+public class UserRoleCodeType extends AbstractCodeType<Integer, Integer> {
 
   private static final long serialVersionUID = 1L;
   public static final Integer ID = 1000;

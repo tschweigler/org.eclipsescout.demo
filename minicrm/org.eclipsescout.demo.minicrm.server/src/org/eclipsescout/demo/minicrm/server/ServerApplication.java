@@ -49,8 +49,6 @@ public class ServerApplication implements IApplication {
     //start the scheduler
 
     Scheduler scheduler = new Scheduler(SERVICES.getService(IBackendService.class).getBackendSubject(), ServerSession.class);
-//    scheduler.addJob(new RabbitMQClientNotificationListenerJob());
-//    scheduler.addJob(new RabbitMQClientNotificationConsumptionListenerJob());
     scheduler.start();
     Activator.getDefault().setScheduler(scheduler);
 

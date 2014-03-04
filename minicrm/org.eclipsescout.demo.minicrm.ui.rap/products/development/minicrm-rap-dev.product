@@ -14,6 +14,7 @@
       <vmArgs>-Xms32m
 -Xmx512m
 -XX:MaxPermSize=256m
+-Dorg.eclipse.rap.rwt.developmentMode=true
 </vmArgs>
    </launcherArgs>
 
@@ -112,6 +113,7 @@
       <plugin id="org.w3c.dom.events"/>
       <plugin id="org.w3c.dom.smil"/>
       <plugin id="org.w3c.dom.svg"/>
+      <plugin id="org.w3c.dom.svg.fragment" fragment="true"/>
    </plugins>
 
 

@@ -12,6 +12,7 @@ package org.eclipsescout.demo.minicrm.server.services.process;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.scout.commons.exception.ProcessingException;
@@ -93,7 +94,7 @@ public class UserProcessService extends AbstractService implements IUserProcessS
   }
 
   @Override
-  public void deleteUser(Long[] u_id) throws ProcessingException {
+  public void deleteUser(List<Long> u_id) throws ProcessingException {
     if (!ACCESS.check(new DeleteUserPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }

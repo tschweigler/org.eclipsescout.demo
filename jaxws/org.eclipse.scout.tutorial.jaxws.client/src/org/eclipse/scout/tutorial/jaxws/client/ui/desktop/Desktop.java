@@ -10,9 +10,10 @@
  ******************************************************************************/
 package org.eclipse.scout.tutorial.jaxws.client.ui.desktop;
 
-
 import java.util.ArrayList;
+import java.util.List;
 
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
@@ -40,12 +41,11 @@ public class Desktop extends AbstractDesktop implements IDesktop {
   public Desktop() {
   }
 
-  @SuppressWarnings("unchecked")
   @Override
-  protected Class<? extends IOutline>[] getConfiguredOutlines() {
-    ArrayList<Class> outlines = new ArrayList<Class>();
+  protected List<Class<? extends IOutline>> getConfiguredOutlines() {
+    List<Class<? extends IOutline>> outlines = new ArrayList<Class<? extends IOutline>>();
     outlines.add(StandardOutline.class);
-    return outlines.toArray(new Class[outlines.size()]);
+    return outlines;
   }
 
   @Override
@@ -65,10 +65,10 @@ public class Desktop extends AbstractDesktop implements IDesktop {
     tableForm.setIconId(Icons.EclipseScout);
     tableForm.startView();
 
-    if (getAvailableOutlines().length > 0) {
-      setOutline(getAvailableOutlines()[0]);
+    IOutline firstOutline = CollectionUtility.firstElement(getAvailableOutlines());
+    if (firstOutline != null) {
+      setOutline(firstOutline);
     }
-
   }
 
   @Order(10.0)
@@ -159,9 +159,5 @@ public class Desktop extends AbstractDesktop implements IDesktop {
       super(Desktop.this, StandardOutline.class);
     }
 
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("StandardOutline");
-    }
   }
 }

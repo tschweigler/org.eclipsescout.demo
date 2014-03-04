@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipsescout.demo.minicrm.shared
 Bundle-SymbolicName: org.eclipsescout.demo.minicrm.shared;singleton:=true
-Bundle-Version: 3.10.0.qualifier
+Bundle-Version: 4.0.0.qualifier
 Bundle-Activator: org.eclipsescout.demo.minicrm.shared.Activator
 Export-Package: org.eclipsescout.demo.minicrm.shared,
  org.eclipsescout.demo.minicrm.shared.notification,
@@ -13,9 +13,10 @@ Export-Package: org.eclipsescout.demo.minicrm.shared,
  org.eclipsescout.demo.minicrm.shared.services.lookup,
  org.eclipsescout.demo.minicrm.shared.services.process,
  org.eclipsescout.demo.minicrm.shared.ui.desktop.form,
+ org.eclipsescout.demo.minicrm.shared.ui.desktop.outlines.pages,
  org.eclipsescout.demo.minicrm.shared.ui.desktop.outlines.pages.searchform,
  org.eclipsescout.demo.minicrm.shared.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.scout.rt.shared;visibility:=reexport
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

@@ -142,7 +142,7 @@ public class UserAdministrationTablePage extends AbstractPageWithTable<UserAdmin
       }
 
       @Override
-      protected Class<? extends ICodeType> getConfiguredCodeType() {
+      protected Class<? extends ICodeType<Integer, Integer>> getConfiguredCodeType() {
         return UserRoleCodeType.class;
 
       }
