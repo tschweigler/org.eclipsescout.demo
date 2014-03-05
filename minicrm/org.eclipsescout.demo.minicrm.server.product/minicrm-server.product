@@ -37,7 +37,6 @@
       <plugin id="javax.xml"/>
       <plugin id="org.apache.ant"/>
       <plugin id="org.apache.commons.codec"/>
-      <plugin id="org.apache.derby.jdbc_1091.fragment" fragment="true"/>
       <plugin id="org.easymock"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.jobs"/>
