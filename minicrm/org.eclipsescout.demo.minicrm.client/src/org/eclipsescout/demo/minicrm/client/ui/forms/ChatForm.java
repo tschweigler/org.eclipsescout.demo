@@ -34,6 +34,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.data.basic.FontSpec;
 import org.eclipse.scout.service.SERVICES;
 import org.eclipsescout.demo.minicrm.client.services.BuddyIconProviderService;
+import org.eclipsescout.demo.minicrm.client.services.NodeIconService;
 import org.eclipsescout.demo.minicrm.client.ui.forms.ChatForm.MainBox.HistoryField;
 import org.eclipsescout.demo.minicrm.client.ui.forms.ChatForm.MainBox.MessageField;
 import org.eclipsescout.demo.minicrm.shared.services.process.ChatFormData;
@@ -276,6 +277,16 @@ public class ChatForm extends AbstractForm {
           protected String getConfiguredHeaderText() {
             return TEXTS.get("ReceivingNode");
           }
+
+          @Override
+          protected void execDecorateCell(Cell cell, ITableRow row) throws ProcessingException {
+            //Set icon by node
+            if (cell.getValue() instanceof String && StringUtility.hasText((String) cell.getValue())) {
+              String value = (String) cell.getValue();
+              String icon = SERVICES.getService(NodeIconService.class).getIcon(value);
+              cell.setIconId(icon);
+            }
+          }
         }
 
         @Order(70.0)
@@ -284,6 +295,16 @@ public class ChatForm extends AbstractForm {
           @Override
           protected String getConfiguredHeaderText() {
             return TEXTS.get("ProvidingNode");
+          }
+
+          @Override
+          protected void execDecorateCell(Cell cell, ITableRow row) throws ProcessingException {
+            //Set icon by node
+            if (cell.getValue() instanceof String && StringUtility.hasText((String) cell.getValue())) {
+              String value = (String) cell.getValue();
+              String icon = SERVICES.getService(NodeIconService.class).getIcon(value);
+              cell.setIconId(icon);
+            }
           }
         }
       }

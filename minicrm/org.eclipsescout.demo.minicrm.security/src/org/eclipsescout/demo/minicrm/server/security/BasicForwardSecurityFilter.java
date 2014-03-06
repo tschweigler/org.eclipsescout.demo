@@ -23,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.scout.commons.Base64Utility;
 import org.eclipse.scout.commons.ConfigIniUtility;
+import org.eclipse.scout.commons.logger.IScoutLogger;
+import org.eclipse.scout.commons.logger.ScoutLogManager;
 import org.eclipse.scout.commons.security.SimplePrincipal;
 import org.eclipse.scout.rt.server.commons.cache.ICacheStoreService;
 import org.eclipse.scout.rt.server.commons.servletfilter.security.AbstractChainableSecurityFilter;
@@ -30,6 +32,8 @@ import org.eclipse.scout.rt.server.commons.servletfilter.security.PrincipalHolde
 import org.eclipse.scout.service.SERVICES;
 
 public class BasicForwardSecurityFilter extends AbstractChainableSecurityFilter {
+
+  private static final IScoutLogger LOG = ScoutLogManager.getLogger(BasicForwardSecurityFilter.class);
 
   private final static String AUTH_SERVLET_URL_PARAM = "authUrl";
   private final static String PROP_BASIC_ATTEMPT = "BahBahSecurityFilter.basicAttempt";

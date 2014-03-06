@@ -49,23 +49,24 @@ public class BuddyIconProviderService extends IconProviderService implements IBu
         // special case for tables: they may add a suffix for open tree nodes -> remove as we only have one icon for expanded & not expanded folders
         iconName = iconName.substring(0, iconName.length() - OPT_BUDDY_ICON_SUFFIX.length());
       }
-      P_LoadDbIconJob job = new P_LoadDbIconJob(m_session, iconName.substring(BUDDY_ICON_PREFIX.length()));
-      job.schedule();
-      try {
-        job.join();
-      }
-      catch (InterruptedException e1) {
-        logger.warn("interrupted waiting on buddy icon load job. ", e1);
-      }
-
-      if (job.getIconSpec().getContent() == null) {
-        // but the user has no icon uploaded yet
-        return super.getIconSpec(BUDDY_DEFAULT_ICON);
-      }
-      else {
-        // return the icon from the database
-        return job.getIconSpec();
-      }
+//      P_LoadDbIconJob job = new P_LoadDbIconJob(m_session, iconName.substring(BUDDY_ICON_PREFIX.length()));
+//      job.schedule();
+//      try {
+//        job.join();
+//      }
+//      catch (InterruptedException e1) {
+//        logger.warn("interrupted waiting on buddy icon load job. ", e1);
+//      }
+//
+//      if (job.getIconSpec().getContent() == null) {
+//        // but the user has no icon uploaded yet
+//        return super.getIconSpec(BUDDY_DEFAULT_ICON);
+//      }
+//      else {
+//        // return the icon from the database
+//        return job.getIconSpec();
+//      }
+      return super.getIconSpec(BUDDY_DEFAULT_ICON);
     }
     else {
       return super.getIconSpec(iconName);

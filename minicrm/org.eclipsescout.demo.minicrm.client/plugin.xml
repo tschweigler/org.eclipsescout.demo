@@ -25,6 +25,11 @@
             class="org.eclipsescout.demo.minicrm.client.services.BahBahNotificationConsumerService"
             session="org.eclipsescout.demo.minicrm.client.ClientSession">
       </service>
+      <service
+            factory="org.eclipse.scout.rt.client.services.ClientServiceFactory"
+            class="org.eclipsescout.demo.minicrm.client.services.NodeIconService"
+            session="org.eclipsescout.demo.minicrm.client.ClientSession">
+      </service>
       <proxy
             factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
             class="org.eclipsescout.demo.minicrm.shared.services.process.INotificationProcessService">
