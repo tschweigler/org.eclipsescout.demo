@@ -69,6 +69,7 @@
       <plugin id="org.eclipse.osgi.compatibility.state" fragment="true"/>
       <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.scout.cloud.cachestore"/>
+      <plugin id="org.eclipse.scout.cloud.cachestore.memcached"/>
       <plugin id="org.eclipse.scout.cloud.notification"/>
       <plugin id="org.eclipse.scout.cloud.notification.rabbitmq"/>
       <plugin id="org.eclipse.scout.commons"/>
@@ -79,6 +80,7 @@
       <plugin id="org.eclipse.scout.jaxws216.test" fragment="true"/>
       <plugin id="org.eclipse.scout.rt.jdbc.derby"/>
       <plugin id="org.eclipse.scout.rt.server"/>
+      <plugin id="org.eclipse.scout.rt.server.commons"/>
       <plugin id="org.eclipse.scout.rt.server.test" fragment="true"/>
       <plugin id="org.eclipse.scout.rt.server.testenvironment"/>
       <plugin id="org.eclipse.scout.rt.shared"/>
