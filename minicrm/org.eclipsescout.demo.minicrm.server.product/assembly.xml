@@ -23,7 +23,7 @@
         <include>plugins/**</include>
       </includes>
       <excludes>
-        <exclude>plugins/javax.servlet*.xml</exclude>
+        <exclude>plugins/javax.servlet*</exclude>
       </excludes>
     </fileSet>
   </fileSets>
