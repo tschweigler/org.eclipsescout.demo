@@ -13,7 +13,7 @@
         <include>**</include>
       </includes>
     </fileSet>
- 
+
     <!-- exported product files -->
     <fileSet>
       <directory>${product.outputDirectory}</directory>
@@ -22,6 +22,9 @@
         <include>configuration/**</include>
         <include>plugins/**</include>
       </includes>
+      <excludes>
+        <exclude>plugins/javax.servlet*.xml</exclude>
+      </excludes>
     </fileSet>
   </fileSets>
 </assembly>
