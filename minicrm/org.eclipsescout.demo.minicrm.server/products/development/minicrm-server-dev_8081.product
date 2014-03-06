@@ -69,17 +69,14 @@
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.compatibility.state" fragment="true"/>
       <plugin id="org.eclipse.osgi.services"/>
-      <plugin id="org.eclipse.scout.cloud.cachestore"/>
       <plugin id="org.eclipse.scout.cloud.cachestore.memcached"/>
-      <plugin id="org.eclipse.scout.cloud.notification"/>
+      <plugin id="org.eclipse.scout.cloud.cachestore.redis"/>
       <plugin id="org.eclipse.scout.cloud.notification.rabbitmq"/>
       <plugin id="org.eclipse.scout.commons"/>
       <plugin id="org.eclipse.scout.commons.log4j.bridge.fragment" fragment="true"/>
       <plugin id="org.eclipse.scout.commons.test" fragment="true"/>
-      <plugin id="org.eclipse.scout.http.servletfilter"/>
       <plugin id="org.eclipse.scout.jaxws216"/>
       <plugin id="org.eclipse.scout.jaxws216.test" fragment="true"/>
-      <plugin id="org.eclipse.scout.rt.jdbc.derby"/>
       <plugin id="org.eclipse.scout.rt.server"/>
       <plugin id="org.eclipse.scout.rt.server.commons"/>
       <plugin id="org.eclipse.scout.rt.server.test" fragment="true"/>
@@ -99,6 +96,7 @@
       <plugin id="org.eclipsescout.demo.minicrm.server"/>
       <plugin id="org.eclipsescout.demo.minicrm.shared"/>
       <plugin id="org.hamcrest.core"/>
+      <plugin id="org.json"/>
       <plugin id="org.junit"/>
    </plugins>
 

@@ -92,7 +92,6 @@
       <plugin id="org.eclipse.scout.net"/>
       <plugin id="org.eclipse.scout.rt.client"/>
       <plugin id="org.eclipse.scout.rt.client.mobile"/>
-      <plugin id="org.eclipse.scout.rt.client.test" fragment="true"/>
       <plugin id="org.eclipse.scout.rt.client.testenvironment"/>
       <plugin id="org.eclipse.scout.rt.extension.client"/>
       <plugin id="org.eclipse.scout.rt.extension.client.test" fragment="true"/>
